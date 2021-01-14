@@ -13,6 +13,10 @@ app.use(express.json());
 app.use(PostRouter);
 app.use(UserRouter);
 
-mongoose.connect('mongodb://localhost:27017/blogApi');
+mongoose.connect('mongodb://localhost:27017/blogApi', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+});
 
 app.listen( port, () => console.log('Server up and running on port 3000'));
