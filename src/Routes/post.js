@@ -1,12 +1,9 @@
 const express = require('express');
-const route = new express.Router;
+const route = new express.Router();
 const Post = require('../Model/Posts');
 
 route.post('/post', async (req, res) => {
-  const post = new Post({
-    title: req.body.title,
-    body: req.body.body
-  })
+  const post = new Post(req.body);
 
   try {
     await post.save();
@@ -20,4 +17,4 @@ route.post('/post', async (req, res) => {
 
 
 
-module.export = route;
+module.exports = route;
