@@ -19,7 +19,7 @@ route.get('/user/signin', auth, async (req, res) => {
     try {
         const user = req.user
         const token = await user.generateToken()
-        res.send(user);
+        res.send({user, token});
     } catch(error) {
         res.status(400).send({Error: error});
     }
