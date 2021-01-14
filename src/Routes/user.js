@@ -1,7 +1,7 @@
 const express = require('express');
 const route = new express.Router();
 const User = require('../Model/User');
-const auth = require('../middleware/Auth');
+const { loginAuth, auth } = require('../middleware/Auth');
 
 
 route.post('/user', async (req, res) => {
@@ -15,7 +15,7 @@ route.post('/user', async (req, res) => {
     }
 })
 
-route.get('/user/signin', auth, async (req, res) => {
+route.get('/user/signin', loginAuth, async (req, res) => {
     try {
         const user = req.user
         const token = await user.generateToken()
@@ -25,7 +25,7 @@ route.get('/user/signin', auth, async (req, res) => {
     }
 })
 
-route.get('/user/me', auth, async (req, res) => {
+route.get('/user/:id', auth, async (req, res) => {
     try {
         res.send(req.user);
     } catch(error) {
@@ -33,8 +33,7 @@ route.get('/user/me', auth, async (req, res) => {
     }
 })
 
-route.patch('/user/:id', async (req, res) => {
-    const _id = req.params.id;
+route.patch('/user/:id', auth, async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['name', 'email', 'password'];
     const isValidUpdate = updates.every(update => allowedUpdates.includes(update));
@@ -42,7 +41,7 @@ route.patch('/user/:id', async (req, res) => {
     if (!isValidUpdate) return res.status(400).send({error: 'Invalid Updates'});
 
     try {
-        const user = await User.findById(_id);
+        const user = req.user;
         updates.forEach(update => user[update] = req.body[update]);
         await user.save();
 
