@@ -22,11 +22,10 @@ const userSchema = new mongoose.Schema({
     }]
 });
 
-userSchema.methods.generateToken = function() {
-    console.log(this.name)
+userSchema.methods.generateToken = async function() {
     const token = jwt.sign({_id: this._id.toString()}, 'fabriyyogi')
     this.tokens = this.tokens.concat({token})
-    this.save()
+    await this.save()
     return token;
 }
 
