@@ -8,6 +8,9 @@ const auth = async function (req, res, next) {
         res.status(401).send({Error: "Invalid username and password!"})
     }
 
+    req.user = user
+    next()
+
 }
 
 module.exports = auth;

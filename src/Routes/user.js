@@ -15,10 +15,19 @@ route.post('/user', async (req, res) => {
     }
 })
 
+route.get('/user/signin', auth, async (req, res) => {
+    try {
+        const user = req.user
+        const token = await user.generateToken()
+        res.send(user);
+    } catch(error) {
+        res.status(400).send({Error: error});
+    }
+})
+
 route.get('/user/me', auth, async (req, res) => {
     try {
-        const user = await User.find();
-        res.send(user);
+        res.send(req.user);
     } catch(error) {
         res.status(400).send({Error: error});
     }
