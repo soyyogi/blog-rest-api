@@ -15,6 +15,15 @@ route.post('/post', async (req, res) => {
   }
 })
 
+route.get('/post', async (req, res) => {
+  try {
+    const posts = await Post.find();
+    res.send(posts)
+  } catch (error) {
+    res.status(500).send({Error: error})
+  }
+})
+
 
 
 module.exports = route;
