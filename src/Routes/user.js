@@ -4,7 +4,7 @@ const User = require('../Model/User');
 const auth = require('../middleware/Auth');
 
 
-route.post('/user', async (req, res) => {
+route.post('/user/signup', async (req, res) => {
     const user = new User(req.body);
     try {
         await user.save()
@@ -22,6 +22,16 @@ route.get('/user/signin', async (req, res) => {
         res.send({user, token});
     } catch(error) {
         res.status(401).send({error: 'Invalid username and password'});
+    }
+})
+
+route.get('/user/signout', auth, async (req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter(token => token.token != req.token)
+        req.user.save()
+        res.status(200).send({status: "Successfully signed out"})
+    } catch (error) {
+        res.status(500).send(error)
     }
 })
 
