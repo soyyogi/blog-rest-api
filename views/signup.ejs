@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+
+  <form class="signup-form">
+    <label for="name">Name</label>
+    <input type="text" id="name" required>
+    <label for="email">Email</label>
+    <input type="email" id="email" required>
+    <label for="password">Password</label>
+    <input type="password" id="password" required>
+    <label for="confirm-password">Confirm Password</label>
+    <input type="password" id="confirm-password" required>
+    <input type="checkbox" id="checkbox" required>
+    <label for="checkbox">Accept <small>Terms and Condition</small></label>
+    <button type="submit">Register</button>
+  </form>
+  <p>Already a user? <a href="/signin">SignIn</a></p>
+
+<%- include('partials/footer') %>

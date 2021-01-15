@@ -4,6 +4,10 @@ const User = require('../Model/User');
 const auth = require('../middleware/Auth');
 
 
+route.get('/', (req, res) => {
+    res.render('signup');
+})
+
 route.post('/user/signup', async (req, res) => {
     const user = new User(req.body);
     try {
@@ -15,10 +19,16 @@ route.post('/user/signup', async (req, res) => {
     }
 })
 
+route.get('/signin', (req, res) => {
+    res.render('signin')
+})
+
 route.get('/user/signin', async (req, res) => {
     try {
-        const user = await User.findUserByIdPassword(req.body.email, req.body.password)
-        const token = await user.generateToken()
+        console.log(req.params);
+        const user = await User.findUserByIdPassword(req.params.email, req.params.password);
+        const token = await user.generateToken();
+        console.log(user);
         res.send({user, token});
     } catch(error) {
         res.status(401).send({error: 'Invalid username and password'});

@@ -1,6 +1,14 @@
 
 <%- include('partials/header') %>
 
-<h1>Hello</h1>
+  <div id="post-container">
+    <% posts.forEach(post => { %>
+      <div class="post">
+        <h3><%= post.authorName %></h3>
+        <h4><%= post.title %></h4>
+        <p><%= post.body %></p>
+      </div>
+    <% }) %>
+  </div>
 
 <%- include('partials/footer') %>

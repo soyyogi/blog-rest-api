@@ -9,6 +9,11 @@ body {
 a {
   text-decoration: none;
 }
+.signup-form,
+.signin-form {
+  display: flex;
+  flex-direction: column;
+}
 .navbar {
   display: flex;
   align-items: center;
