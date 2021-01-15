@@ -2,6 +2,9 @@ const express = require('express');
 const route = new express.Router();
 const Post = require('../Model/Posts');
 
+route.get('/', (req, res) => {
+  res.render('home');
+})
 
 route.post('/post', async (req, res) => {
   const post = new Post(req.body);
