@@ -10,8 +10,8 @@ route.post('/post', auth, async (req, res) => {
   try {
     await post.save();
     res.send(post);
-  } catch(Error) {
-    res.status(400).send({Error: error});
+  } catch (Error) {
+    res.status(400).send({ Error: error });
   }
 })
 
@@ -24,13 +24,18 @@ route.get('/post', auth, async (req, res) => {
   }
 })
 
-route.delete('/post/:id', async function(req,res) {
+route.delete('/post/:id', auth, async function (req, res) {
   try {
-    const deletedPost = await Post.findById(req.params.id);
-     await deletedPost.remove();
-    res.send(deletedPost);
+
+    const post = await Post.findById(req.params.id);
+    const isValid = post.author.toString() == req.user._id.toString();
+    if(!isValid){
+      return res.status(400).send({Error: 'You are not the author'})
+    }
+    await post.remove();
+    res.send(post);
   } catch (error) {
-    res.status(400).send({Error: error});
+    res.status(500).send();
   }
 })
 
@@ -41,8 +46,8 @@ route.patch('/post/:id', async (req, res) => {
 
   const isValidUpdate = updates.every(update => allowedUpdates.includes(update))
 
-  if(!isValidUpdate) {
-    return res.status(400).send({error: 'Invalid Updates'})
+  if (!isValidUpdate) {
+    return res.status(400).send({ error: 'Invalid Updates' })
   }
 
   try {
@@ -50,7 +55,7 @@ route.patch('/post/:id', async (req, res) => {
     updates.forEach(update => post[update] = req.body[update])
     await post.save()
 
-    if(!post) {
+    if (!post) {
       return res.status(404).send()
     }
 
