@@ -1,7 +1,7 @@
 const express = require('express');
 const route = new express.Router();
 const User = require('../Model/User');
-const { loginAuth, auth } = require('../middleware/Auth');
+const auth = require('../middleware/Auth');
 
 
 route.post('/user', async (req, res) => {
@@ -15,13 +15,13 @@ route.post('/user', async (req, res) => {
     }
 })
 
-route.get('/user/signin', loginAuth, async (req, res) => {
+route.get('/user/signin', async (req, res) => {    
     try {
-        const user = req.user
+        const user = await User.findUserByIdPassword(req.body.email, req.body.password)
         const token = await user.generateToken()
         res.send({user, token});
     } catch(error) {
-        res.status(400).send({Error: error});
+        res.status(401).send({error: 'Invalid username and password'});
     }
 })
 
