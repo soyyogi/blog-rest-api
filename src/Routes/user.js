@@ -25,7 +25,7 @@ route.get('/user/signin', async (req, res) => {
     }
 })
 
-route.get('/user/:id', auth, async (req, res) => {
+route.get('/user/me', auth, async (req, res) => {
     try {
         res.send(req.user);
     } catch(error) {
@@ -33,7 +33,7 @@ route.get('/user/:id', auth, async (req, res) => {
     }
 })
 
-route.patch('/user/:id', auth, async (req, res) => {
+route.patch('/user/me', auth, async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ['name', 'email', 'password'];
     const isValidUpdate = updates.every(update => allowedUpdates.includes(update));
