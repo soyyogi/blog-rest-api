@@ -3,7 +3,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   background: #eee;
 }
@@ -31,12 +30,17 @@ a {
   display: flex;
   align-items: center;
   vertical-align: middle;
+  text-transform: capitalize;
 }
 .logout-link{
   margin-left: auto;
 }
 
-footer {
+.container {
+  padding: 2em;
+}
+
+.footer {
   background: #aaa;
   position: absolute;
   bottom: 0;

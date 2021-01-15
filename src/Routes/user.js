@@ -9,13 +9,13 @@ route.post('/user/signup', async (req, res) => {
     try {
         await user.save()
         const token = await user.generateToken()
-        res.send(user)
+        res.send({user, token})
     } catch (error) {
         res.status(400).send(error)
     }
 })
 
-route.get('/user/signin', async (req, res) => {    
+route.get('/user/signin', async (req, res) => {
     try {
         const user = await User.findUserByIdPassword(req.body.email, req.body.password)
         const token = await user.generateToken()
