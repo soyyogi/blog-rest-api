@@ -1,31 +1,21 @@
 const User = require('../Model/User');
+const jwt = require('jsonwebtoken');
 
-const loginAuth = async function (req, res, next) {
-    const user = await User.findOne({email : req.body.email})
+const auth = async function (req, res, next) {
+    let token = req.headers.authorization
+    if(!token) {
+        return res.status(401).send({Error: "Please sign in!"})
+    }
+    token = token.replace("Bearer ", "")
+    const decoded = await jwt.verify(token, 'fabriyyogi')
+    const user = await User.findOne({_id: decoded._id, "tokens.token": token })
     if(!user) {
         return res.status(401).send({Error: "Invalid username and password!"})
     }
 
-    const isAuthorized = user.password === req.body.password
-    if(!isAuthorized) {
-        return res.status(401).send({Error: "Invalid username and password!"})
-    }
-
     req.user = user
-    next()
-
-}
-
-const auth = async function (req, res, next) {
-    const token = req.headers.authorization.replace("Bearer ", "")
-    const user = await User.findOne({_id : req.params.id})
-    const isAuthorized = user.tokens.some(el => el.token === token)
-    if(!isAuthorized) {
-        return res.status(401).send({Error: "Invalid username and password!"})
-    }
-
-    req.user = user
+    req.token = token
     next()
 }
 
-module.exports = { loginAuth, auth };
+module.exports = auth;
