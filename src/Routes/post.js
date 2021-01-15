@@ -29,8 +29,8 @@ route.delete('/post/:id', auth, async function (req, res) {
 
     const post = await Post.findById(req.params.id);
     const isValid = post.author.toString() == req.user._id.toString();
-    if(!isValid){
-      return res.status(400).send({Error: 'You are not the author'})
+    if (!isValid) {
+      return res.status(400).send({ Error: 'You are not the author' })
     }
     await post.remove();
     res.send(post);
@@ -39,7 +39,7 @@ route.delete('/post/:id', auth, async function (req, res) {
   }
 })
 
-route.patch('/post/:id', async (req, res) => {
+route.patch('/post/:id', auth, async (req, res) => {
   const _id = req.params.id
   const updates = Object.keys(req.body)
   const allowedUpdates = ['title', 'body']
@@ -51,7 +51,11 @@ route.patch('/post/:id', async (req, res) => {
   }
 
   try {
-    const post = await Post.findById(_id)
+    const post = await Post.findById(req.params.id);
+    const isValid = post.author.toString() == req.user._id.toString();
+    if (!isValid) {
+      return res.status(400).send({ Error: 'You are not the author' })
+    }
     updates.forEach(update => post[update] = req.body[update])
     await post.save()
 
