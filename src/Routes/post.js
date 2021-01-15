@@ -1,10 +1,12 @@
 const express = require('express');
 const route = new express.Router();
 const Post = require('../Model/Posts');
+const auth = require('../middleware/Auth');
 
 
-route.post('/post', async (req, res) => {
+route.post('/post', auth, async (req, res) => {
   const post = new Post(req.body);
+  post.author = req.user._id;
   try {
     await post.save();
     res.send(post);
@@ -13,12 +15,12 @@ route.post('/post', async (req, res) => {
   }
 })
 
-route.get('/post', async (req, res) => {
+route.get('/post', auth, async (req, res) => {
   try {
-    const posts = await Post.find();
-    res.send(posts)
+    await req.user.populate('posts').execPopulate()
+    res.send(req.user.posts)
   } catch (error) {
-    res.status(500).send({Error: error})
+    res.status(500).send(error)
   }
 })
 
