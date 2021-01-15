@@ -53,12 +53,9 @@ route.patch('/user/me', auth, async (req, res) => {
 })
 
 
-route.delete('/user/:id', async (req, res) => {
+route.delete('/user/me', auth, async (req, res) => {
     try {
-        const user = await User.findById(req.params.id)
-        if(!user) {
-            res.status(404).send({Error: "User not found"})
-        }
+        const user = req.user
         await user.remove()
         res.send(user)
     } catch (error) {
