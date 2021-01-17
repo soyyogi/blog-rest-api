@@ -2,6 +2,7 @@
 <%- include('partials/header') %>
 
   <div id="post-container">
+    <a href="/post/create">Create new post</a>
     <% posts.forEach(post => { %>
       <div class="post">
         <h3><%= post.authorName %> <small><%= post.authorEmail %></small></h3>
@@ -9,12 +10,17 @@
         <p><%= post.body %></p>
       </div>
       <div>
-        <button class="btn">Edit</button>
-        <button class="btn-delete" id="<%=post._id%>">delete</button>
-        <!-- <a href="/post/delete/?id=<%=post._id%>">Delete</a> -->
+        <form action="/post/edit" method="post">
+          <input type="text" value="<%=post._id%>" name="id" style="display: none">
+          <button>Edit</button>
+        </form>
+
+        <form action="/post/delete" method="post">
+          <input type="text" value="<%=post._id%>" name="id" style="display: none">
+          <button>Delete</button>
+        </form>
       </div>
     <% }) %>
-
   </div>
 
 
