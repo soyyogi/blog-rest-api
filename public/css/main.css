@@ -94,7 +94,9 @@ header {
 }
 .form-container button,
 .btn-cancel,
-.btn-save {
+.btn-save,
+.delete-account,
+.edit-account {
   margin: 10px;
   border: none;
   border-radius: 5px;
@@ -104,8 +106,21 @@ header {
 }
 .form-container button:hover,
 .btn-cancel:hover,
-.btn-save:hover {
+.btn-save:hover,
+.edit-account:hover {
   background: #ccc;
+  cursor: pointer;
+}
+
+
+.delete-account {
+  background: red;
+  color: white;
+}
+
+.delete-account:hover {
+  background: black;
+  cursor: pointer;
 }
 
 .form {

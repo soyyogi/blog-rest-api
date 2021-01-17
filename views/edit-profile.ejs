@@ -1,0 +1,18 @@
+
+<%- include('partials/header') %>
+
+<form class="form" action="/user/me/edit" method="post">
+  <input class="profile-user" type="text" name="authorization" style="display: none;">
+  <label for="name">Name</label>
+  <input type="text" name="name" value="<%= user.name %>" id="name">
+  <label for="email">Email</label>
+  <input type="email" name="email" value="<%= user.email %>" id="email">  
+  <button class="btn-save" type="submit">Save</button>
+</form>
+<form class="form" action="/user/me" method="post">
+  <input class="profile-user" type="text" name="authorization" style="display: none;">
+  <button class="btn-cancel" type="submit">Cancel</button>
+</form>
+
+<%- include('partials/footer') %>
+

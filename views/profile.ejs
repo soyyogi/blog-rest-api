@@ -5,6 +5,14 @@
     <h1>Welcome to your profile</h1>
     <p><b>Name: </b><%= user.name %></p>
     <p><b>Email: </b><%= user.email %></p>
+    <form action="/user/me/editor" method="post">
+        <input class="profile-user" type="text" name="authorization" style="display: none;">
+        <button class="edit-account" type="submit">Edit Profile</button>
+    </form>
+    <form action="/user/me/delete" method="post">
+        <input class="profile-user" type="text" name="authorization" style="display: none;">
+        <button class="delete-account" type="submit">Delete my account</button>
+    </form>
 </div>
 <script>
     localStorage.setItem('token', '<%= token %>')

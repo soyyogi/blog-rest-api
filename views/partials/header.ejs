@@ -13,7 +13,7 @@
   <title>Blog</title>
   <script>
     setTimeout(() => {
-      document.querySelector('#profile-user').value = localStorage.getItem('token')
+      document.querySelectorAll('.profile-user').forEach(e => e.value = localStorage.getItem('token'))
     }, 500)
   </script>
 </head>
@@ -30,16 +30,22 @@
         </li>
         <li class="nav-item">
           <form action="/user/me" method="post">
-            <input id="profile-user" type="text" name="authorization" style="display: none;">
+            <input class="profile-user" type="text" name="authorization" style="display: none;">
             <button class="profile-nav-link" type="submit">
               <span class="material-icons">account_circle</span> user
             </button>
           </form>
         </li>
       </ul>
-      <a class="nav-link" href="/user/signout">
+      <form action="/user/signout" method="post">
+        <input class="profile-user" type="text" name="authorization" style="display: none;">
+        <button class="profile-nav-link" type="submit">
+          <span class="material-icons">login</span> Logout
+        </button>
+      </form>
+      <!-- <a class="nav-link" href="/user/signout">
         <span class="material-icons">login</span> Logout
-      </a>
+      </a> -->
     </nav>
   </header>
     <div class="container">
