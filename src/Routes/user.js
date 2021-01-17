@@ -1,6 +1,7 @@
 const express = require('express');
 const route = new express.Router();
 const User = require('../Model/User');
+const Auth = require('../middleware/Auth');
 
 
 route.get('/', (req, res) => {
@@ -29,13 +30,16 @@ route.post('/user/signup', async (req, res) => {
     }
 })
 
-// route.get('/user/me', async (req, res) => {
-//     try {
-//         res.render('profile');
-//     } catch(error) {
-//         res.status(400).send({Error: error});
-//     }
-// })
+route.post('/user/me', Auth, async (req, res) => {
+    try {
+        res.render('profile', {
+            user: req.user,
+            token: req.token
+        });
+    } catch(error) {
+        res.status(400).send({Error: error});
+    }
+})
 
 // route.get('/signin', (req, res) => {
 //     res.render('signin')

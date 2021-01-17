@@ -11,6 +11,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
   <!-- <script defer src="script/main.js"></script> -->
   <title>Blog</title>
+  <script>
+    setTimeout(() => {
+      document.querySelector('#profile-user').value = localStorage.getItem('token')
+    }, 500)
+  </script>
 </head>
 <body>
   <header>
@@ -24,9 +29,12 @@
           <a href="/posts" class="nav-link">home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/user/me">
-            <span class="material-icons">account_circle</span> user
-          </a>
+          <form action="/user/me" method="post">
+            <input id="profile-user" type="text" name="authorization" style="display: none;">
+            <button class="profile-nav-link" type="submit">
+              <span class="material-icons">account_circle</span> user
+            </button>
+          </form>
         </li>
       </ul>
       <a class="nav-link" href="/user/signout">
