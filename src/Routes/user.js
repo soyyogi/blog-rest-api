@@ -3,20 +3,32 @@ const route = new express.Router();
 const User = require('../Model/User');
 
 
-// route.get('/', (req, res) => {
-//     res.render('signup');
-// })
+route.get('/', (req, res) => {
+    res.render('signup');
+})
 
-// route.post('/user/signup', async (req, res) => {
-//     const user = new User(req.body);
-//     try {
-//         await user.save()
-//         const token = await user.generateToken()
-//         res.send({user, token})
-//     } catch (error) {
-//         res.status(400).send(error)
-//     }
-// })
+route.post('/user/signup', async (req, res) => {
+    if(req.body.password != req.body['confirm-password']){
+        res.render('signup-error', {
+            data: req.body,
+            error: 'Password doesn\'t match!'
+        })
+    }
+    delete req.body['confirm-password']
+    delete req.body.checkbox
+    console.log(req.body)
+    const user = new User(req.body);
+    try {
+        await user.save()
+        const token = await user.generateToken()
+        res.render('profile', {user, token})
+    } catch (error) {
+        res.status(400).render('signup-error', {
+            data: req.body,
+            error : error.message
+        })
+    }
+})
 
 // route.get('/signin', (req, res) => {
 //     res.render('signin')
