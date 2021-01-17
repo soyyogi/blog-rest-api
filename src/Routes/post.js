@@ -9,6 +9,7 @@ route.post('/post', auth, async (req, res) => {
   const post = new Post(req.body);
   post.author = req.user._id;
   post.authorName = req.user.name;
+  post.authorEmail = req.user.email;
   try {
     await post.save();
     res.send(post);
@@ -37,16 +38,16 @@ route.get('/post', auth, async (req, res) => {
   }
 })
 
-route.delete('/post/:id', auth, async function (req, res) {
+route.post('/post/delete/:id', async function (req, res) {
   try {
-
     const post = await Post.findById(req.params.id);
-    const isValid = post.author.toString() == req.user._id.toString();
-    if (!isValid) {
-      return res.status(400).send({ Error: 'You are not the author' })
-    }
+    console.log(req.params.id);
+    // const isValid = post.author.toString() == req.user._id.toString();
+    // if (!isValid) {
+    //   return res.status(400).send({ Error: 'You are not the author' })
+    // }
     await post.remove();
-    res.send(post);
+    res.redirect('/posts');
   } catch (error) {
     res.status(500).send();
   }

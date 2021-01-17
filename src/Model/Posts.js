@@ -18,6 +18,10 @@ const PostSchema = new mongoose.Schema({
   authorName: {
     type: String,
     required: true
+  },
+  authorEmail: {
+    type: String,
+    required: true
   }
 })
 

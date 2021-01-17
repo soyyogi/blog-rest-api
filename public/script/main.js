@@ -1,4 +1,13 @@
-document.querySelector('#home-link').addEventListener('click', getPost);
+document.querySelectorAll('.btn-delete').forEach(function(btn) {
+  btn.addEventListener('click', async () => {
+    console.log(btn.id);
+    await $.ajax({
+      url: `/post/delete/?id=${btn.id}`,
+      type: 'POST',
+    })
+    // window.location.assign('/posts');
+  })
+})
 
 if (document.querySelector('.signup-form')) {
   document.querySelector('.signup-form').addEventListener('submit', registerUser);

@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
 const PostRouter = require('./Routes/post');
@@ -7,6 +8,7 @@ const UserRouter = require('./Routes/user');
 const app = express();
 const port = 3000 || process.env.PORT;
 
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('public'));
 app.set('view engine', '.ejs');
 app.use(express.json());
