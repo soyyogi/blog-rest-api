@@ -1,11 +1,14 @@
 <%- include('partials/header') %>
 
-  <form action="/post/create" method="post">
+  <form class="form" action="/post/create" method="post">
     <label for="title">Title</label>
     <input type="text" name="title" id="title">
     <label for="body">Body</label>
-    <input type="text" name="body" id="body">
-    <button type="submit">Create</button>
+    <textarea name="body" id="body" cols="30" rows="10"></textarea>
+    <button type="submit" class="btn-save">Create</button>
+  </form>
+  <form class="form" action="/posts" method="get">
+    <button class="btn-cancel">Cancel</button>
   </form>
 
 <%- include('partials/footer') %>

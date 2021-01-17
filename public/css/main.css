@@ -9,11 +9,6 @@ body {
 a {
   text-decoration: none;
 }
-.signup-form,
-.signin-form {
-  display: flex;
-  flex-direction: column;
-}
 .navbar {
   display: flex;
   align-items: center;
@@ -44,10 +39,80 @@ a {
 .container {
   padding: 2em;
 }
+.create-post {
+  margin: 12px 0;
+  padding: 8px 16px;
+  text-transform: capitalize;
+  font-size: 18px;
+}
+
+.post-wrapper {
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px 0;
+}
+.post-title {
+  font-size: 32px;
+  text-transform: capitalize;
+}
+.post-body {
+  font-size: 24px;
+}
+.form-container {
+  display: flex;
+}
+.btn-save,
+.btn-cancel {
+  display: block;
+}
+.form-container button,
+.btn-cancel,
+.btn-save {
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  background: #aaa;
+  transition: all .2s ease-in-out;
+}
+.form-container button:hover,
+.btn-cancel:hover,
+.btn-save:hover {
+  background: #ccc;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input,
+.form textarea,
+.form label {
+  margin: 10px;
+}
+
+.form input {
+  height: 30px;
+  font-size: 20px;
+}
+.form textarea {
+  font-size: 20px;
+  font-family: inherit;
+}
+
 
 .footer {
   background: #aaa;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   width: 100%;
   height: 30px;

@@ -2,23 +2,24 @@
 <%- include('partials/header') %>
 
   <div id="post-container">
-    <a href="/post/create">Create new post</a>
+    <a href="/post/create"><button class="create-post">Create new post</button></a>
     <% posts.forEach(post => { %>
-      <div class="post">
-        <h3><%= post.authorName %> <small><%= post.authorEmail %></small></h3>
-        <h4><%= post.title %></h4>
-        <p><%= post.body %></p>
-      </div>
-      <div>
-        <form action="/post/edit" method="post">
-          <input type="text" value="<%=post._id%>" name="id" style="display: none">
-          <button>Edit</button>
-        </form>
-
-        <form action="/post/delete" method="post">
-          <input type="text" value="<%=post._id%>" name="id" style="display: none">
-          <button>Delete</button>
-        </form>
+      <div class="post-wrapper">
+        <div class="post">
+          <!-- <h3><%= post.authorName %> <small><%= post.authorEmail %></small></h3> -->
+          <h4 class="post-title"><%= post.title %></h4>
+          <p class="post-body"><%= post.body %></p>
+        </div>
+        <div class="form-container">
+          <form action="/post/edit" method="post">
+            <input type="text" value="<%=post._id%>" name="id" style="display: none">
+            <button>Edit</button>
+          </form>
+          <form action="/post/delete" method="post">
+            <input type="text" value="<%=post._id%>" name="id" style="display: none">
+            <button>Delete</button>
+          </form>
+        </div>
       </div>
     <% }) %>
   </div>
