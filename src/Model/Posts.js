@@ -9,20 +9,27 @@ const PostSchema = new mongoose.Schema({
   body: {
     type: String,
     required: true,
+  },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
+  },
+  authorName: {
+    type: String,
+    required: true
+  },
+  authorEmail: {
+    type: String,
+    required: true
+  },
+  createdAt: {
+    type: String,
+    required: true
+  },
+  modifiedAt: {
+    type: String
   }
-  // author: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: true,
-  //   ref: 'User'
-  // },
-  // authorName: {
-  //   type: String,
-  //   required: true
-  // },
-  // authorEmail: {
-  //   type: String,
-  //   required: true
-  // }
 })
 
 const Post = new mongoose.model('Post', PostSchema);

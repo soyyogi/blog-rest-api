@@ -6,16 +6,19 @@
     <% posts.forEach(post => { %>
       <div class="post-wrapper">
         <div class="post">
-          <!-- <h3><%= post.authorName %> <small><%= post.authorEmail %></small></h3> -->
+          <h4><b><%= post.authorName %></b> <small><%= post.createdAt %></small></h4>
+          <p><%= post.authorEmail %></p>
           <h4 class="post-title"><%= post.title %></h4>
           <p class="post-body"><%= post.body %></p>
         </div>
         <div class="form-container">
           <form action="/post/edit" method="post">
+            <input class="profile-user" type="text" name="authorization" style="display: none;">
             <input type="text" value="<%=post._id%>" name="id" style="display: none">
             <button>Edit</button>
           </form>
           <form action="/post/delete" method="post">
+            <input class="profile-user" type="text" name="authorization" style="display: none;">
             <input type="text" value="<%=post._id%>" name="id" style="display: none">
             <button>Delete</button>
           </form>

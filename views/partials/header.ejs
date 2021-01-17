@@ -14,7 +14,7 @@
   <script>
     setTimeout(() => {
       document.querySelectorAll('.profile-user').forEach(e => e.value = localStorage.getItem('token'))
-    }, 500)
+    }, 300)
   </script>
 </head>
 <body>
@@ -26,7 +26,10 @@
       </button> -->
       <ul class="navbar-nav">
         <li class="nav-item" id="home-link">
-          <a href="/posts" class="nav-link">home</a>
+          <form action="/posts" method="post">
+            <input class="profile-user" type="text" name="authorization" style="display: none;">
+            <button class="profile-nav-link" type="submit">Home</button>
+          </form>
         </li>
         <li class="nav-item">
           <form action="/user/me" method="post">

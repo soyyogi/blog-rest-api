@@ -1,10 +1,10 @@
 const express = require('express');
 const route = new express.Router();
 const Post = require('../Model/Posts');
+const Auth = require('../middleware/Auth');
 
 
-
-route.get('/posts', async (req,res) => {
+route.post('/posts', Auth, async (req,res) => {
   try {
     const posts = await  Post.find();
     res.render('home', {posts})
@@ -18,31 +18,39 @@ route.get('/post/create', (req, res) => {
   res.render('create-post');
 })
 
-route.post('/post/create', async (req, res) => {
+route.post('/post/create', Auth, async (req, res) => {
   const post = new Post({
     title: req.body.title,
-    body: req.body.body
+    body: req.body.body,
+    author: req.user._id,
+    authorName: req.user.name,
+    authorEmail: req.user.email,
+    createdAt: new Date().toDateString()
   })
   await post.save();
-  res.redirect('/posts');
+  const posts = await  Post.find();
+  res.render('home', {posts})
 })
 
-route.post('/post/delete', async (req, res) => {
+route.post('/post/delete', Auth, async (req, res) => {
   await Post.deleteOne({_id: req.body.id});
-  res.redirect('/posts');
+  const posts = await  Post.find();
+  res.render('home', {posts})
 })
 
-route.post('/post/edit', async (req, res) => {
+route.post('/post/edit', Auth, async (req, res) => {
   const post = await Post.findById(req.body.id);
   res.render('edit-post', {post});
 })
 
-route.post('/post-edit', async (req, res) => {
+route.post('/post-edit', Auth, async (req, res) => {
   const post = await Post.findById(req.body.id);
   post.title = req.body.title;
   post.body = req.body.body;
+  post.modifiedAt = new Date().toDateString()
   await post.save();
-  res.redirect('/posts');
+  const posts = await  Post.find();
+  res.render('home', {posts})
 })
 
 // route.post('/post', async (req, res) => {

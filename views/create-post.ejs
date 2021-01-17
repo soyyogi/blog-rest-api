@@ -1,14 +1,16 @@
 <%- include('partials/header') %>
 
   <form class="form" action="/post/create" method="post">
+    <input class="profile-user" type="text" name="authorization" style="display: none;">
     <label for="title">Title</label>
     <input type="text" name="title" id="title">
     <label for="body">Body</label>
     <textarea name="body" id="body" cols="30" rows="10"></textarea>
     <button type="submit" class="btn-save">Create</button>
   </form>
-  <form class="form" action="/posts" method="get">
-    <button class="btn-cancel">Cancel</button>
+  <form class="form" action="/posts" method="post">
+    <input class="profile-user" type="text" name="authorization" style="display: none;">
+    <button class="btn-cancel" type="submit">Cancel</button>
   </form>
 
 <%- include('partials/footer') %>
