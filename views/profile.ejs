@@ -2,10 +2,11 @@
 <%- include('partials/header') %>
 
 <div>
-    <p><%= user.name %></p>
-    <p><%= user.email %></p>
-    <p><%= user._id %></p>
-    <p><%= token %></p>
+    <h1>Welcome to your profile</h1>
+    <p><b>Name: </b><%= user.name %></p>
+    <p><b>Email: </b><%= user.email %></p>
 </div>
-
+<script>
+    localStorage.setItem('token', '<%= token %>')
+</script>
 <%- include('partials/footer') %>

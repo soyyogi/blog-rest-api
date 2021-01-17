@@ -16,7 +16,6 @@ route.post('/user/signup', async (req, res) => {
     }
     delete req.body['confirm-password']
     delete req.body.checkbox
-    console.log(req.body)
     const user = new User(req.body);
     try {
         await user.save()
@@ -29,6 +28,14 @@ route.post('/user/signup', async (req, res) => {
         })
     }
 })
+
+// route.get('/user/me', async (req, res) => {
+//     try {
+//         res.render('profile');
+//     } catch(error) {
+//         res.status(400).send({Error: error});
+//     }
+// })
 
 // route.get('/signin', (req, res) => {
 //     res.render('signin')
