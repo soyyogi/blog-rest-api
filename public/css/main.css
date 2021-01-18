@@ -15,6 +15,17 @@ header {
   top: 0;
 }
 
+.signup-form {
+  display: flex;
+  flex-direction: column;
+}
+.signup-form label {
+  margin: 5px 0;
+}
+.signup-form button {
+  margin-bottom: 10px;
+}
+
 .navbar {
   display: flex;
   align-items: center;
