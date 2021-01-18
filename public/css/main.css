@@ -1,0 +1,156 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #eee;
+}
+a {
+  text-decoration: none;
+}
+
+header {
+  position: sticky;
+  top: 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 2em;
+  background: pink;
+}
+.navbar-nav {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex: 2;
+  margin-left: 2em;
+}
+.nav-item {
+  margin: 0 .5em;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  text-transform: capitalize;
+}
+
+.profile-nav-link {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  color: #8F248B;
+}
+
+.profile-nav-link:hover {
+  cursor: pointer;
+}
+
+.logout-link{
+  margin-left: auto;
+}
+
+.container {
+  padding: 2em;
+}
+.create-post {
+  margin: 12px 0;
+  padding: 8px 16px;
+  text-transform: capitalize;
+  font-size: 18px;
+}
+
+.post-wrapper {
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 8px 16px;
+  margin-bottom: 20px;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px 0;
+}
+.post-title {
+  font-size: 32px;
+  text-transform: capitalize;
+}
+.post-body {
+  font-size: 24px;
+}
+.form-container {
+  display: flex;
+}
+.btn-save,
+.btn-cancel {
+  display: block;
+}
+.form-container button,
+.btn-cancel,
+.btn-save,
+.delete-account,
+.edit-account {
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  background: #aaa;
+  transition: all .2s ease-in-out;
+}
+.form-container button:hover,
+.btn-cancel:hover,
+.btn-save:hover,
+.edit-account:hover {
+  background: #ccc;
+  cursor: pointer;
+}
+
+
+.delete-account {
+  background: red;
+  color: white;
+}
+
+.delete-account:hover {
+  background: black;
+  cursor: pointer;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input,
+.form textarea,
+.form label {
+  margin: 10px;
+}
+
+.form input {
+  height: 30px;
+  font-size: 20px;
+}
+.form textarea {
+  font-size: 20px;
+  font-family: inherit;
+}
+
+
+.footer {
+  background: #aaa;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
